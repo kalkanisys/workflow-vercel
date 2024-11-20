@@ -26,11 +26,12 @@ This repository contains a reusable GitHub workflow to deploy frontend projects 
      deploy:
        uses: kalkanisys/workflow-vercel/.github/workflows/deploy.yml@main
        with:
-         VERCEL_ARGS: ${{ '--prod' }}
+         VERCEL_ARGS: '--prod'
+         VERCEL_PROJECT_ID: 'project-id'
+         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+         VERCEL_SCOPE: 'token-scope'
        secrets:
          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-         VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
    ```
 
 3. Add the required secrets to your GitHub repository:
