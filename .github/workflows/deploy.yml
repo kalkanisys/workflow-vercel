@@ -25,9 +25,6 @@ on:
       VERCEL_TOKEN:
         description: "Vercel token"
         required: true
-      GITHUB_TOKEN:
-        description: "GitHub token"
-        required: false
 
 jobs:
   deploy:
