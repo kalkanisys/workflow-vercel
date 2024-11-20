@@ -5,26 +5,34 @@ on:
     inputs:
       NODE_VERSION:
         description: "Node.js version"
+        type: string
         required: false
         default: "20"
       VERCEL_ARGS:
         description: "Vercel arguments"
+        type: string
         required: false
         default: ""
       VERCEL_PROJECT_ID:
         description: "Vercel project ID"
+        type: string
         required: true
       VERCEL_ORG_ID:
         description: "Vercel organization ID"
+        type: string
         required: true
       VERCEL_SCOPE:
         description: "Vercel scope"
+        type: string
         required: false
         default: ""
     secrets:
       VERCEL_TOKEN:
         description: "Vercel token"
         required: true
+      VERCEL_GITHUB_TOKEN:
+        description: "GitHub token"
+        required: false
 
 jobs:
   deploy:
@@ -46,7 +54,7 @@ jobs:
       - uses: amondnet/vercel-action@v25 #deploy
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
+          github-token: ${{ secrets.VERCEL_GITHUB_TOKEN }} #Optional
           vercel-args: ${{ inputs.VERCEL_ARGS }}
           vercel-org-id: ${{ inputs.VERCEL_ORG_ID}} #Required
           vercel-project-id: ${{ inputs.VERCEL_PROJECT_ID}} #Required
