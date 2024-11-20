@@ -1,0 +1,54 @@
+name: Deploy to Vercel
+
+on:
+  workflow_call:
+    inputs:
+      NODE_VERSION:
+        description: "Node.js version"
+        required: false
+        default: "20"
+      VERCEL_ARGS:
+        description: "Vercel arguments"
+        required: false
+        default: ""
+    secrets:
+      VERCEL_TOKEN:
+        description: "Vercel token"
+        required: true
+        type: secret
+      VERCEL_PROJECT_ID:
+        description: "Vercel project ID"
+        required: true
+        type: secret
+      VERCEL_ORG_ID:
+        description: "Vercel organization ID"
+        required: true
+        type: secret
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      deployments: write
+      repository-projects: write
+      statuses: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v2
+      # - name: Install Node.js
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     NODE_VERSION: ${{ inputs.NODE_VERSION }}
+      - uses: amondnet/vercel-action@v25 #deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          # github-token: ${{ secrets.GITHUB_TOKEN }} #Optional
+          vercel-args: ${{ inputs.VERCEL_ARGS }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}} #Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required
+          github-comment: true
+          github-deployment: true
+
