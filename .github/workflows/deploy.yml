@@ -26,6 +26,11 @@ on:
         type: string
         required: false
         default: ""
+      VERCEL_WORKING_DIR:
+        description: "Vercel working directory"
+        type: string
+        required: false
+        default: "."
     secrets:
       VERCEL_TOKEN:
         description: "Vercel token"
@@ -59,6 +64,6 @@ jobs:
           vercel-org-id: ${{ inputs.VERCEL_ORG_ID}} #Required
           vercel-project-id: ${{ inputs.VERCEL_PROJECT_ID}} #Required
           scope: ${{ inputs.VERCEL_SCOPE }}
+          working-directory: ${{ inputs.VERCEL_WORKING_DIR }} #Optional
           github-comment: true
           github-deployment: true
-
